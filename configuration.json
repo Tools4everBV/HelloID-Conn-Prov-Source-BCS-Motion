@@ -1,0 +1,22 @@
+[
+    {
+      "key": "csvPath",
+      "type": "input",
+      "defaultValue": "",
+      "templateOptions": {
+        "label": "Motion CSV file location",
+        "placeholder": "\\\\server\\share",
+        "required": true
+      }
+    },
+    {
+      "key": "csvDelimiter",
+      "type": "input",
+      "defaultValue": "",
+      "templateOptions": {
+        "label": "CSV Delimiter",
+        "placeholder": ";",
+        "required": true
+      }
+    }
+  ]

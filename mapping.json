@@ -1,0 +1,278 @@
+{
+	"personMappings": [
+		{
+			"name": "Contact.Business.Email",
+			"mode": "field",
+			"value": "ZAKELIJKEMAIL",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Contact.Business.Phone.Fixed",
+			"mode": "field",
+			"value": "ZAKELIJKTELEFOONNR",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Contact.Business.Phone.Mobile",
+			"mode": "field",
+			"value": "ZAKELIJKMOBIELNR",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.BirthDate",
+			"mode": "complex",
+			"value": "function getValue() {\r\n    let parts = source.GEBOORTEDAT.split('-');\r\n    let newdatum = parts[2] + '/' + parts[1] + '/' +  parts[0];\r\n    return newdatum\r\n}\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Details.BirthLocality",
+			"mode": "field",
+			"value": "GEBOORTEPLAATS",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.Gender",
+			"mode": "complex",
+			"value": "let value = ''\r\nif (source.GESLACHT != null) {\r\n    value = value.concat(source.GESLACHT === \"M\" ? \"M\" : \"F\");\r\n}",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "ExternalId",
+			"mode": "complex",
+			"value": "function getValue() {\r\n    return source.WERKGEVERNR + \"_\" + source.REGISTRATIENR\r\n}\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Location.Code",
+			"mode": "field",
+			"value": "Locatie_Cd",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Location.ExternalId",
+			"mode": "field",
+			"value": "Locatie_Id",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Location.Name",
+			"mode": "field",
+			"value": "Locatie",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.Convention",
+			"mode": "complex",
+			"value": "function getValue() {\r\n     if(source.INDNAAMGEBRUIK  == \"\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"0\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"1\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"2\") {\r\n        return \"P\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"3\") {\r\n        return \"PB\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"4\") {\r\n        return \"BP\";\r\n    }\r\n}\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.FamilyName",
+			"mode": "field",
+			"value": "PERSOONNM",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.FamilyNamePartner",
+			"mode": "field",
+			"value": "RELATIENM",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyNamePartnerPrefix",
+			"mode": "field",
+			"value": "RELVOORVOEGSEL",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.FamilyNamePrefix",
+			"mode": "field",
+			"value": "VOORVOEGSEL",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.GivenName",
+			"mode": "field",
+			"value": "VOORNM",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Name.Initials",
+			"mode": "field",
+			"value": "VOORLETTERS",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Name.NickName",
+			"mode": "field",
+			"value": "ROEPNM",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "UserName",
+			"mode": "field",
+			"value": "WEBGEBRUIKERSNAAM",
+			"validation": {
+				"required": false
+			}
+		}
+	],
+	"contractMappings": [
+		{
+			"name": "CostCenter.ExternalId",
+			"mode": "field",
+			"value": "ID_TWKPL",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "CostCenter.Name",
+			"mode": "field",
+			"value": "KSTPLAATS",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Department.ExternalId",
+			"mode": "complex",
+			"value": "function getValue() {\r\n    return sourceContract.WERKGEVERNR + sourceContract.HIERARCHIE_CD\r\n}\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Details.Fte",
+			"mode": "field",
+			"value": "FTE",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Details.HoursPerWeek",
+			"mode": "complex",
+			"value": "parseInt(sourceContract.UREN_PW)",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Division.ExternalId",
+			"mode": "field",
+			"value": "BusinessUnitExternalId",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Division.Name",
+			"mode": "field",
+			"value": "BusinessUnitName",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "EndDate",
+			"mode": "complex",
+			"value": "let endDate = sourceContract.DATUMEINDE_UREN;\r\nif (typeof endDate !== 'undefined' && endDate) {\r\n    parts = endDate.split('-');\r\n    parts[2] + '/' + parts[1] + '/' + parts[0]; \r\n} else {\r\n    \"\"\r\n}\r\n\r\n",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "ExternalId",
+			"mode": "complex",
+			"value": "function getValue() {\r\n    return sourceContract.CONTRACTCODE + \".\" + sourceContract.DATUMINGANG_UREN + \".\" + sourceContract.DATUMEINDE_UREN\r\n}\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Manager.ExternalId",
+			"mode": "field",
+			"value": "ManagerExternalId",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Organization.ExternalId",
+			"mode": "field",
+			"value": "WERKGEVERNR",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Organization.Name",
+			"mode": "field",
+			"value": "OrganizationName",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "StartDate",
+			"mode": "complex",
+			"value": "function getValue() {\r\n    let parts = sourceContract.DATUMINGANG_UREN.split('-');\r\n    let newdatum = parts[2] + '/' + parts[1] + '/' +  parts[0];\r\n    return newdatum\r\n}\r\ngetValue();",
+			"validation": {
+				"required": true
+			}
+		},
+		{
+			"name": "Title.ExternalId",
+			"mode": "field",
+			"value": "functionExternalId",
+			"validation": {
+				"required": false
+			}
+		},
+		{
+			"name": "Title.Name",
+			"mode": "field",
+			"value": "FunctionName",
+			"validation": {
+				"required": false
+			}
+		}
+	]
+}

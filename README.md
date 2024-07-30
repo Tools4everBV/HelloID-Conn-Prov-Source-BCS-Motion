@@ -5,7 +5,7 @@
 | This repository contains the connector and configuration code only. The implementer is responsible for acquiring the connection details such as username, password, certificate, etc. You might even need to sign a contract or agreement with the supplier before implementing this connector. Please contact the client's application manager to coordinate the connector requirements. |
 
 <p align="center">
-  <img src="https://www.tools4ever.nl/connector-logos/centricmotion-logo.png">
+  <img src="https://www.tools4ever.nl/wp-content/uploads/2022/03/Logo.png">
 </p>
 
 <!-- TABLE OF CONTENTS -->

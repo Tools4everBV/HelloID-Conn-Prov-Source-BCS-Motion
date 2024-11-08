@@ -17,11 +17,8 @@ $functionList = $csvFunctions | Select-Object -Property *,@{Name = "externalId";
 
 $csvOrganizations = Import-CSV -Path "$csvDirectory\Tools4ever_Organizations.csv"  -Delimiter $csvDelimiter | Group-Object WERKGEVERNR -AsHashTable
 
-
 $csvManagers = Import-CSV -Path "$csvDirectory\Tools4ever_Managers1.csv" -Delimiter $csvDelimiter
-#@GJT(Kersten) tijdelijk door ontbreken MAN_WERKGEVERNR deze onttrokken met $_.UID_MAN.Substring(0,5)
 $managerList = $csvManagers | Select-Object -Property *,@{Name = "employeeExternalId"; Expression = { $_.MED_WERKGEVERNR + "_" + $_.MED_REGISTRATIENR } }, @{Name = "managerExternalId"; Expression = { $_.UID_MAN.Substring(0,5) + "_" + $_.MAN_REGISTRATIENR } } | Group-Object employeeExternalId -AsHashTable -AsString
-#$managerList = $csvManagers | Group-Object employeeExternalId -AsHashTable -AsString
 
 # add contracts, externalId and displayName properties to persons
 $persons | Add-Member -MemberType NoteProperty -Name "Contracts" -Value $null -Force
@@ -78,6 +75,11 @@ $persons | ForEach-Object {
     if ($null -ne $personContracts) {
         $_.Contracts = $personContracts
     }
+}
+
+if($config.ExcludePersonsWithoutContract)
+{
+    $persons = $persons | Where-Object -Property Contracts -ne $null
 }
 
 # Make sure persons are unique

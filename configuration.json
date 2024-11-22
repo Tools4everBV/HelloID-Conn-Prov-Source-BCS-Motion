@@ -1,22 +1,32 @@
 [
-    {
-      "key": "csvPath",
-      "type": "input",
-      "defaultValue": "",
-      "templateOptions": {
-        "label": "Motion CSV file location",
-        "placeholder": "\\\\server\\share",
-        "required": true
-      }
-    },
-    {
-      "key": "csvDelimiter",
-      "type": "input",
-      "defaultValue": "",
-      "templateOptions": {
-        "label": "CSV Delimiter",
-        "placeholder": ";",
-        "required": true
-      }
+  {
+    "key": "csvPath",
+    "type": "input",
+    "defaultValue": "",
+    "templateOptions": {
+      "label": "Motion CSV file location",
+      "placeholder": "\\\\server\\share",
+      "required": true
     }
-  ]
+  },
+  {
+    "key": "csvDelimiter",
+    "type": "input",
+    "defaultValue": "",
+    "templateOptions": {
+      "label": "CSV Delimiter",
+      "placeholder": ";",
+      "required": true
+    }
+  },
+  {
+    "key": "ExcludePersonsWithoutContract",
+    "type": "checkbox",
+    "defaultValue": false,
+    "templateOptions": {
+      "label": "Exclude persons without a contract",
+      "description": "When toggled, persons without a contract will not be imported",
+      "required": false
+    }
+  }
+]

@@ -43,7 +43,7 @@
 		{
 			"name": "Details.Gender",
 			"mode": "complex",
-			"value": "let value = ''\r\nif (source.GESLACHT != null) {\r\n    value = value.concat(source.GESLACHT === \"M\" ? \"M\" : \"F\");\r\n}",
+			"value": "function getGender()\r\n{\r\n    let value = ''\r\n    if (source.GESLACHT != null) {\r\n        value = value.concat(source.GESLACHT === \"M\" ? \"M\" : \"F\");\r\n    }\r\n\r\n    return value;\r\n}\r\n\r\ngetGender();",
 			"validation": {
 				"required": true
 			}
@@ -57,25 +57,9 @@
 			}
 		},
 		{
-			"name": "Location.Code",
-			"mode": "field",
-			"value": "Locatie_Cd",
-			"validation": {
-				"required": false
-			}
-		},
-		{
-			"name": "Location.ExternalId",
-			"mode": "field",
-			"value": "Locatie_Id",
-			"validation": {
-				"required": false
-			}
-		},
-		{
 			"name": "Location.Name",
 			"mode": "field",
-			"value": "Locatie",
+			"value": "LOCATIE",
 			"validation": {
 				"required": false
 			}
@@ -83,7 +67,7 @@
 		{
 			"name": "Name.Convention",
 			"mode": "complex",
-			"value": "function getValue() {\r\n     if(source.INDNAAMGEBRUIK  == \"\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"0\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"1\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"2\") {\r\n        return \"P\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"3\") {\r\n        return \"PB\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"4\") {\r\n        return \"BP\";\r\n    }\r\n}\r\ngetValue();",
+			"value": "function getValue() {\r\n    switch(source.INDNAAMGEBRUIK)\r\n    {\r\n       case \"0\" : return \"B\";\r\n       case \"1\" : return \"B\";\r\n       case \"2\" : return \"P\";\r\n       case \"3\" : return \"PB\";\r\n       case \"4\" : return \"BP\";\r\n       default: return \"B\";\r\n    }/*\r\n     if(source.INDNAAMGEBRUIK  == \"\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"0\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"1\") {\r\n        return \"B\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"2\") {\r\n        return \"P\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"3\") {\r\n        return \"PB\";\r\n    }\r\n    if(source.INDNAAMGEBRUIK  == \"4\") {\r\n        return \"BP\";\r\n    }\r\n    */\r\n}\r\ngetValue();",
 			"validation": {
 				"required": true
 			}
@@ -189,31 +173,15 @@
 		{
 			"name": "Details.HoursPerWeek",
 			"mode": "complex",
-			"value": "parseInt(sourceContract.UREN_PW)",
+			"value": "function getHoursPerWeek()\r\n{\r\n    return parseInt(sourceContract.UREN_PW);\r\n}\r\n\r\ngetHoursPerWeek();",
 			"validation": {
 				"required": false
-			}
-		},
-		{
-			"name": "Division.ExternalId",
-			"mode": "field",
-			"value": "BusinessUnitExternalId",
-			"validation": {
-				"required": false
-			}
-		},
-		{
-			"name": "Division.Name",
-			"mode": "field",
-			"value": "BusinessUnitName",
-			"validation": {
-				"required": true
 			}
 		},
 		{
 			"name": "EndDate",
 			"mode": "complex",
-			"value": "let endDate = sourceContract.DATUMEINDE_UREN;\r\nif (typeof endDate !== 'undefined' && endDate) {\r\n    parts = endDate.split('-');\r\n    parts[2] + '/' + parts[1] + '/' + parts[0]; \r\n} else {\r\n    \"\"\r\n}\r\n\r\n",
+			"value": "function getEndDate()\r\n{\r\n    let endDate = sourceContract.DATUMEINDE_UREN;\r\n    if (typeof endDate !== 'undefined' && endDate) {\r\n        let parts = endDate.split('-');\r\n        return parts[2] + '/' + parts[1] + '/' + parts[0]; \r\n    } else {\r\n        return \"\";\r\n    }\r\n}\r\n\r\ngetEndDate();\r\n\r\n",
 			"validation": {
 				"required": false
 			}
@@ -221,7 +189,7 @@
 		{
 			"name": "ExternalId",
 			"mode": "complex",
-			"value": "function getValue() {\r\n    return sourceContract.CONTRACTCODE + \".\" + sourceContract.DATUMINGANG_UREN + \".\" + sourceContract.DATUMEINDE_UREN\r\n}\r\ngetValue();",
+			"value": "function getExternalId() {\r\n    return sourceContract.CONTRACTCODE + \".\" + sourceContract.DATUMINGANG_UREN + \".\" + sourceContract.DATUMEINDE_UREN;\r\n}\r\ngetExternalId();",
 			"validation": {
 				"required": true
 			}
@@ -253,7 +221,7 @@
 		{
 			"name": "StartDate",
 			"mode": "complex",
-			"value": "function getValue() {\r\n    let parts = sourceContract.DATUMINGANG_UREN.split('-');\r\n    let newdatum = parts[2] + '/' + parts[1] + '/' +  parts[0];\r\n    return newdatum\r\n}\r\ngetValue();",
+			"value": "function getStartDate()\r\n{\r\n    let startDate = sourceContract.DATUMINGANG_UREN;\r\n    if (typeof startDate !== 'undefined' && startDate) {\r\n        let parts = startDate.split('-');\r\n        return parts[2] + '/' + parts[1] + '/' + parts[0]; \r\n    } else {\r\n        return \"\";\r\n    }\r\n}\r\n\r\ngetStartDate();\r\n\r\n",
 			"validation": {
 				"required": true
 			}
